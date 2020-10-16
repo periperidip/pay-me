@@ -414,7 +414,7 @@ public class HomeScreen implements ActionListener {
 
                     } else {
 
-                        new Register(user_name, formattedDate, email);
+                        new Register(user_name, formattedDate, email).setVisible(true);;
                         frame.setVisible(false);
 
                     }
