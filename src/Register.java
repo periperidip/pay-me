@@ -272,7 +272,7 @@ public class Register extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[] { "Yes", "No" },
 					JOptionPane.YES_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
-				new HomeScreen().setVisible(true);
+				new HomeScreen();
 				setVisible(false);
 			} else if (result == JOptionPane.NO_OPTION) {
 			} else if (result == JOptionPane.CLOSED_OPTION) {
@@ -348,7 +348,7 @@ public class Register extends JFrame implements ActionListener {
 
 					JOptionPane.showMessageDialog(null, display_info);
 
-					new HomeScreen().setVisible(true);
+					new HomeScreen();
 					setVisible(false);
 				} catch (Exception exception) {
 					System.out.println(exception);
