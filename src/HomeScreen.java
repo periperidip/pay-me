@@ -15,7 +15,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class HomeScreen implements ActionListener {
 
-    String LABEL_FONT1 = "Century Schoolbook L";
+    String LABEL_FONT1 = "Century Schoolbook L"; 
+  
     int FONT1 = 0;
     int FONT2 = 1;
     int FONT_SIZE = 25;
@@ -65,6 +66,8 @@ public class HomeScreen implements ActionListener {
         l_gridLayout1.setHgap(2);
         p_panel = new JPanel(l_gridLayout1);
         p_panel.setBackground(Color.BLACK);
+
+        p_logIn.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -238,6 +241,7 @@ public class HomeScreen implements ActionListener {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         checkbox.addActionListener(this);
         b_logIn.addActionListener(this);
@@ -264,7 +268,7 @@ public class HomeScreen implements ActionListener {
     }
 
     public static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(inDate.trim());
@@ -285,8 +289,8 @@ public class HomeScreen implements ActionListener {
         }
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
-                + cal.get(Calendar.YEAR);
+        String formatedDate = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
+                + cal.get(Calendar.DATE);
         return formatedDate;
 
     }
@@ -353,14 +357,13 @@ public class HomeScreen implements ActionListener {
                     int userId = Integer.parseInt(s_userId);
                     password = toHexString(getSHA(password));
 
-                    String q1 = "SELECT * FROM Users WHERE userID = '" + userId + "'";
+                    String q1 = "SELECT * FROM users WHERE userID = '" + userId + "'";
 
                     ResultSet rs_logIn = connection.statement.executeQuery(q1);
                     if (rs_logIn.next()) {
-                        String DB_password = rs_logIn.getString("hash");
+                        String DB_password = rs_logIn.getString("password");
                         if (password.equals(DB_password)) {
-                            // TODO uncomment this line
-                            // new Transactions(int userId).setVisible(true);
+                            // new Transactions(int userId)
                             JOptionPane.showMessageDialog(null, "GO Ahead!");
                             frame.setVisible(false);
                         } else {
@@ -394,7 +397,10 @@ public class HomeScreen implements ActionListener {
                 } else {
 
                     formattedDate = dateFormatter(DOB);
-                    if (picker.getDate().compareTo(new Date()) > 0) {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date currentDate = new Date();
+                    dateFormat.format(currentDate);
+                    if (picker.getDate().compareTo(currentDate) > 0) {
                         JOptionPane.showMessageDialog(null, "Invalid Date of birth!", "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     } else if (!isValidDate(formattedDate)) {
@@ -408,7 +414,7 @@ public class HomeScreen implements ActionListener {
 
                     } else {
 
-                        new Register(user_name, formattedDate, email).setVisible(true);
+                        new Register(user_name, formattedDate, email);
                         frame.setVisible(false);
 
                     }
