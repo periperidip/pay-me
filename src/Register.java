@@ -414,7 +414,10 @@ public class Register extends JFrame implements ActionListener {
 		if (rs.next()) {
 			String max_userid_query = "SELECT MAX(userID) FROM users";
 			ResultSet max_user_id = mysqlConnection.statement.executeQuery(max_userid_query);
-			return max_user_id.getInt(1) + 1;
+			if (max_user_id.next())
+				return max_user_id.getInt(1) + 1;
+			else 
+				return 90001;
 		} else
 			return 90001;
 	}
@@ -428,7 +431,10 @@ public class Register extends JFrame implements ActionListener {
 		if (rs.next()) {
 			String max_accountnumber_query = "SELECT MAX(account_number) FROM accounts";
 			ResultSet max_account_number = mysqlConnection.statement.executeQuery(max_accountnumber_query);
-			return increment(max_account_number.getString(1));
+			if (max_account_number.next())
+				return increment(max_account_number.getString(1));
+			else
+				return "28460100990001";
 		} else
 			return "28460100990001";
 	}
