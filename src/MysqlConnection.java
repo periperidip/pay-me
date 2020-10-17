@@ -11,9 +11,9 @@ public class MysqlConnection {
     MysqlConnection() {
         try {
             dataSource = new MysqlDataSource();
-            dataSource.setUser("saksham");
-            dataSource.setPassword("1234567890");
-            dataSource.setURL("jdbc:mysql://localhost:3306/mydatabase?characterEncoding=latin1");
+            dataSource.setUser("wWmdXesrny");
+            dataSource.setPassword("IZISIVykNb");
+            dataSource.setURL("jdbc:mysql://remotemysql.com:3306/wWmdXesrny?characterEncoding=latin1");
             connection = dataSource.getConnection();
             statement = connection.createStatement();
         } catch (Exception exception) {
