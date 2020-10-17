@@ -336,10 +336,13 @@ public class Register extends JFrame implements ActionListener {
 					password_to_assign = getHash(password);
 					account_pin_to_assign = String.format("%04d", random.nextInt(10000));
 
-					insert_users_query = "INSERT INTO users VALUES('" + userid_to_assign + "', '" + name + "', '" + address + "', '" + phone_number + "', '" + email_address + "', '" + aadhar_number + "', '" + password_to_assign + "', '" + date_of_birth + "'," + pin_code + ", '" + gender + "', '" + pan_number + "')";
+					insert_users_query = "INSERT INTO users VALUES('" + userid_to_assign + "', '" + name + "', '"
+							+ address + "', '" + phone_number + "', '" + email_address + "', '" + aadhar_number + "', '"
+							+ password_to_assign + "', '" + date_of_birth + "'," + pin_code + ", '" + gender + "', '"
+							+ pan_number + "')";
 
 					insert_account_query = "INSERT INTO accounts VALUES ('" + userid_to_assign + "', '"
-						+ account_number_to_assign + "', '" + 1500 + "', '" + account_pin_to_assign + "')";
+							+ account_number_to_assign + "', '" + 1500 + "', '" + account_pin_to_assign + "')";
 
 					mysqlConnection.statement.executeUpdate(insert_users_query);
 					mysqlConnection.statement.executeUpdate(insert_account_query);
@@ -359,8 +362,10 @@ public class Register extends JFrame implements ActionListener {
 
 	}
 
-	public static boolean checkEmptyFields(String address, String pin_code, String phone_number, String aadhar_number, String pan_number, String password, String confirm_password, boolean male, boolean female){
-		return address.equals("") || pin_code.equals("") || phone_number.equals("") || aadhar_number.equals("") || pan_number.equals("") || password.equals("") || confirm_password.equals("") || (!male && !female);
+	public static boolean checkEmptyFields(String address, String pin_code, String phone_number, String aadhar_number,
+			String pan_number, String password, String confirm_password, boolean male, boolean female) {
+		return address.equals("") || pin_code.equals("") || phone_number.equals("") || aadhar_number.equals("")
+				|| pan_number.equals("") || password.equals("") || confirm_password.equals("") || (!male && !female);
 	}
 
 	public static boolean checkPasswordMatch(String password, String confirm_password) {
@@ -402,22 +407,29 @@ public class Register extends JFrame implements ActionListener {
 
 	public static int getNewUserId() throws SQLException {
 		MysqlConnection mysqlConnection = new MysqlConnection();
-		String max_userid_query = "SELECT MAX(userID) FROM users";
 
-		ResultSet max_user_id = mysqlConnection.statement.executeQuery(max_userid_query);
-		if (max_user_id.next())
+		String check_empty = "SELECT userID from users";
+		ResultSet rs = mysqlConnection.statement.executeQuery(check_empty);
+
+		if (rs.next()) {
+			String max_userid_query = "SELECT MAX(userID) FROM users";
+			ResultSet max_user_id = mysqlConnection.statement.executeQuery(max_userid_query);
 			return max_user_id.getInt(1) + 1;
-		else
+		} else
 			return 90001;
 	}
 
 	public static String getNewAccountNumber() throws SQLException {
 		MysqlConnection mysqlConnection = new MysqlConnection();
-		String max_accountnumber_query = "SELECT MAX(account_number) FROM accounts";
-		ResultSet max_account_number = mysqlConnection.statement.executeQuery(max_accountnumber_query);
-		if (max_account_number.next())
+
+		String check_empty = "SELECT account_number from accounts";
+		ResultSet rs = mysqlConnection.statement.executeQuery(check_empty);
+
+		if (rs.next()) {
+			String max_accountnumber_query = "SELECT MAX(account_number) FROM accounts";
+			ResultSet max_account_number = mysqlConnection.statement.executeQuery(max_accountnumber_query);
 			return increment(max_account_number.getString(1));
-		else
+		} else
 			return "28460100990001";
 	}
 }
