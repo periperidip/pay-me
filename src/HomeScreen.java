@@ -15,8 +15,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class HomeScreen implements ActionListener {
 
-    String LABEL_FONT1 = "Century Schoolbook L"; 
-  
+    String LABEL_FONT1 = "Century Schoolbook L";
+
     int FONT1 = 0;
     int FONT2 = 1;
     int FONT_SIZE = 25;
@@ -45,12 +45,12 @@ public class HomeScreen implements ActionListener {
         p_logIn = new JPanel();
 
         l_logIn = new JLabel("Existing User");
-        l_userId = new JLabel("User ID :        ");
-        l_password = new JLabel("Password :        ");
-        l_signUp = new JLabel("New User");
-        l_userName = new JLabel("Name :        ");
-        l_DOB = new JLabel("Date of Birth :        ");
-        l_email = new JLabel("Email :        ");
+        l_userId = new JLabel("       User ID :");
+        l_password = new JLabel("       Password :");
+        l_signUp = new JLabel("         New User");
+        l_userName = new JLabel("         Name :");
+        l_DOB = new JLabel("         Date of Birth :");
+        l_email = new JLabel("         Email :");
 
         b_logIn = new JButton("Sign In");
         b_signUp = new JButton("Sign Up");
@@ -71,6 +71,7 @@ public class HomeScreen implements ActionListener {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.weightx = 1d;
         gbc.gridwidth = 3;
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -79,7 +80,7 @@ public class HomeScreen implements ActionListener {
         p_logIn.add(l_logIn, gbc);
 
         gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.gridwidth = 3;
         gbc.gridy++;
 
@@ -144,6 +145,7 @@ public class HomeScreen implements ActionListener {
         GridBagConstraints gbc2 = new GridBagConstraints();
 
         gbc2.insets = new Insets(10, 10, 10, 10);
+        gbc2.weightx = 1d;
         gbc2.gridwidth = 3;
         gbc2.gridx = 0;
         gbc2.gridy = 0;
@@ -167,7 +169,7 @@ public class HomeScreen implements ActionListener {
 
         gbc2.gridx++;
         gbc2.gridwidth = 2;
-        t_userName = new JTextField("");
+        t_userName = new JTextField();
         t_userName.setFont(new Font(LABEL_FONT1, FONT1, FONT_SIZE));
         p_signUp.add(t_userName, gbc2);
 
@@ -340,9 +342,9 @@ public class HomeScreen implements ActionListener {
                 }
             }
 
-            if (ae.getSource() == b_logIn) {
+            MysqlConnection connection = new MysqlConnection();
 
-                MysqlConnection connection = new MysqlConnection();
+            if (ae.getSource() == b_logIn) {
 
                 String s_userId = t_userId.getText();
                 String password = String.valueOf(p_passField.getPassword());
