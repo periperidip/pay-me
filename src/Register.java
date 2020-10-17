@@ -86,7 +86,7 @@ public class Register extends JFrame implements ActionListener {
 		l_aadhar_number = new JLabel("Aadhar Number:");
 		l_aadhar_number.setFont(new Font("Serif", Font.BOLD, 20));
 
-		l_pan_number = new JLabel("Pan Number:");
+		l_pan_number = new JLabel("PAN Number:");
 		l_pan_number.setFont(new Font("Serif", Font.BOLD, 20));
 
 		l_password = new JLabel("Password:");
@@ -197,6 +197,7 @@ public class Register extends JFrame implements ActionListener {
 
 		p_gender.add(l_gender, BorderLayout.WEST);
 		p_gender.add(p_gender_values, BorderLayout.EAST);
+		p_gender.setBorder(new EmptyBorder(0, 0, 0, 70));
 
 		p_aadhar_number.add(l_aadhar_number, BorderLayout.WEST);
 		p_aadhar_number.add(t_aadhar_number, BorderLayout.EAST);
