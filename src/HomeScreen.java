@@ -6,6 +6,7 @@ import org.jdesktop.swingx.JXDatePicker;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Calendar;
 import java.math.BigInteger;
@@ -37,6 +38,11 @@ public class HomeScreen implements ActionListener {
 		addComponentToPane();
 	}
 
+	private JLabel getLlogin(){
+		JLabel lLogin = new JLabel("Existing User");
+
+		return lLogin;
+	}
 	public void addComponentToPane() {
 
 		frame = new JFrame("Payme");
@@ -44,7 +50,7 @@ public class HomeScreen implements ActionListener {
 		p_signUp = new JPanel();
 		p_logIn = new JPanel();
 
-		l_logIn = new JLabel("Existing User");
+		l_logIn = getLlogin();
 		l_userId = new JLabel("       User ID :");
 		l_password = new JLabel("       Password :");
 		l_signUp = new JLabel("         New User");
@@ -251,7 +257,7 @@ public class HomeScreen implements ActionListener {
 
 	}
 
-	public static boolean isNumeric(String str) {
+	private static boolean isNumeric(String str) {
 		for (char c : str.toCharArray()) {
 			if (!Character.isDigit(c))
 				return false;
@@ -259,7 +265,7 @@ public class HomeScreen implements ActionListener {
 		return true;
 	}
 
-	public static boolean isValidEmail(String email) {
+	private static boolean isValidEmail(String email) {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
 				+ "A-Z]{2,7}$";
 
@@ -269,7 +275,7 @@ public class HomeScreen implements ActionListener {
 		return pat.matcher(email).matches();
 	}
 
-	public static boolean isValidDate(String inDate) {
+	private static boolean isValidDate(String inDate) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		try {
@@ -280,13 +286,14 @@ public class HomeScreen implements ActionListener {
 		return true;
 	}
 
-	public static String dateFormatter(String inDate) {
+	private static String dateFormatter(String inDate) {
 
 		DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
 		Date date = null;
 		try {
 			date = formatter.parse(inDate);
-		} catch (Exception ex) {
+
+		} catch (ParseException ex) {
 			System.out.println(ex);
 		}
 		Calendar cal = Calendar.getInstance();
@@ -297,14 +304,14 @@ public class HomeScreen implements ActionListener {
 
 	}
 
-	public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
+	private static byte[] getSHA(String input) throws NoSuchAlgorithmException {
 
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 
 		return md.digest(input.getBytes(StandardCharsets.UTF_8));
 	}
 
-	public static String toHexString(byte[] hash) {
+	private static String toHexString(byte[] hash) {
 
 		BigInteger number = new BigInteger(1, hash);
 
@@ -317,16 +324,33 @@ public class HomeScreen implements ActionListener {
 		return hexString.toString();
 	}
 
-	public static boolean isEmptyFields(String username, String password) {
+	private static boolean isEmptyFields(String username, String password) {
 
 		return (username.equals("") || password.equals(""));
 
 	}
 
-	public static boolean isEmptyFields(String username, String DOB, String email) {
+	private static boolean isEmptyFields(String username, String DOB, String email) {
 
 		return (username.equals("") || DOB.equals("") || email.equals(""));
 
+	}
+	
+	private boolean isRegisteredEmail(String email, MysqlConnection connection) {
+		String checkEmailQuery = "SELECT * FROM users WHERE email = '" + email + "'";
+		try 
+		{
+			ResultSet rs = connection.statement.executeQuery(checkEmailQuery);
+			if (rs.next()) 
+			{
+				return true;
+			}
+			
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
@@ -343,7 +367,6 @@ public class HomeScreen implements ActionListener {
 			}
 
 			MysqlConnection connection = new MysqlConnection();
-
 			if (ae.getSource() == b_logIn) {
 
 				String s_userId = t_userId.getText();
@@ -414,10 +437,14 @@ public class HomeScreen implements ActionListener {
 
 						JOptionPane.showMessageDialog(null, "Invalid Email!", "Error", JOptionPane.ERROR_MESSAGE);
 
-					} else {
+					} 
+					else if (isRegisteredEmail(email,connection))
+					{
+						JOptionPane.showMessageDialog(null, "Email already registered!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
 
 						new Register(user_name, formattedDate, email).setVisible(true);
-						;
 						frame.setVisible(false);
 
 					}
@@ -429,6 +456,7 @@ public class HomeScreen implements ActionListener {
 		}
 
 	}
+
 
 	public static void main(String[] args) {
 
