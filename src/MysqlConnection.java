@@ -17,7 +17,7 @@ public class MysqlConnection {
             connection = dataSource.getConnection();
             statement = connection.createStatement();
         } catch (Exception exception) {
-            System.err.println(exception);
+            System.err.println("got exception "+exception);
         }
     }
 }
