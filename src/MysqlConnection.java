@@ -11,13 +11,13 @@ public class MysqlConnection {
     MysqlConnection() {
         try {
             dataSource = new MysqlDataSource();
-            dataSource.setUser("abhay");
-            dataSource.setPassword("abhay");
-            dataSource.setURL("jdbc:mysql://localhost:3306/payme?characterEncoding=latin1");
+            dataSource.setUser("wWmdXesrny");
+            dataSource.setPassword("IZISIVykNb");
+            dataSource.setURL("jdbc:mysql://remotemysql.com:3306/wWmdXesrny?characterEncoding=latin1");
             connection = dataSource.getConnection();
             statement = connection.createStatement();
         } catch (Exception exception) {
-            System.err.println(exception);
+            System.err.println("got exception "+exception);
         }
     }
 }
