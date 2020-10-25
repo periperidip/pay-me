@@ -38,11 +38,12 @@ public class HomeScreen implements ActionListener {
 		addComponentToPane();
 	}
 
-	private JLabel getLlogin(){
+	private JLabel getLlogin() {
 		JLabel lLogin = new JLabel("Existing User");
 
 		return lLogin;
 	}
+
 	public void addComponentToPane() {
 
 		frame = new JFrame("Payme");
@@ -335,19 +336,16 @@ public class HomeScreen implements ActionListener {
 		return (username.equals("") || DOB.equals("") || email.equals(""));
 
 	}
-	
+
 	private boolean isRegisteredEmail(String email, MysqlConnection connection) {
 		String checkEmailQuery = "SELECT * FROM users WHERE email = '" + email + "'";
-		try 
-		{
+		try {
 			ResultSet rs = connection.statement.executeQuery(checkEmailQuery);
-			if (rs.next()) 
-			{
+			if (rs.next()) {
 				return true;
 			}
-			
-		} catch (Exception e) 
-		{
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -437,12 +435,10 @@ public class HomeScreen implements ActionListener {
 
 						JOptionPane.showMessageDialog(null, "Invalid Email!", "Error", JOptionPane.ERROR_MESSAGE);
 
-					} 
-					else if (isRegisteredEmail(email,connection))
-					{
-						JOptionPane.showMessageDialog(null, "Email already registered!", "Error", JOptionPane.ERROR_MESSAGE);
-					}
-					else {
+					} else if (isRegisteredEmail(email, connection)) {
+						JOptionPane.showMessageDialog(null, "Email already registered!", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
 
 						new Register(user_name, formattedDate, email).setVisible(true);
 						frame.setVisible(false);
@@ -456,7 +452,6 @@ public class HomeScreen implements ActionListener {
 		}
 
 	}
-
 
 	public static void main(String[] args) {
 
