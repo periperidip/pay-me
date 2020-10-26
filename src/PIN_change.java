@@ -30,35 +30,36 @@ public class PIN_change extends JFrame implements ActionListener{
 		setVisible(true);
 
         l_change_pin=new JLabel("CHANGE YOUR PIN");
-        l_change_pin.setFont(new Font("System",Font.BOLD,22));
+        l_change_pin.setFont(new Font("System",Font.BOLD,48));
 
         l_current_pin= new JLabel("CURRENT PIN");
-        l_current_pin.setFont(new Font("System",Font.BOLD,22));
+        l_current_pin.setFont(new Font("System",Font.BOLD,25));
 
         l_new_pin = new JLabel("NEW PIN");
-        l_new_pin.setFont(new Font("System",Font.BOLD,22));
+        l_new_pin.setFont(new Font("System",Font.BOLD,25));
 
         l_confirm_pin = new JLabel("CONFIRM NEW PIN");
-        l_confirm_pin.setFont( new Font("System",Font.BOLD,22));
+        l_confirm_pin.setFont( new Font("System",Font.BOLD,25));
 
         current_pin = new JPasswordField(15);
-        current_pin.setFont(new Font("Raleway", Font.BOLD, 22));
+        
+        current_pin.setFont(new Font("Raleway", Font.BOLD, 28));
         
         new_pin = new JPasswordField(15);
-        new_pin.setFont(new Font("Raleway", Font.BOLD, 22));
+        new_pin.setFont(new Font("Raleway", Font.BOLD, 28));
         
         confirm_pin = new JPasswordField(15);
-        confirm_pin.setFont(new Font("Raleway", Font.BOLD, 22));
+        confirm_pin.setFont(new Font("Raleway", Font.BOLD, 28));
         
         save = new JButton("SAVE");
-        save.setFont(new Font("System", Font.BOLD, 18));
-        save.setBackground(Color.BLACK);
-        save.setForeground(Color.WHITE);
+        save.setFont(new Font("System", Font.BOLD, 25));
+        save.setBackground(Color.white);
+        save.setForeground(Color.black);
     
         cancel = new JButton("CANCEL");
-        cancel.setFont(new Font("System", Font.BOLD, 18));
-        cancel.setBackground(Color.BLACK);
-        cancel.setForeground(Color.WHITE);
+        cancel.setFont(new Font("System", Font.BOLD, 25));
+        cancel.setBackground(Color.white);
+        cancel.setForeground(Color.black);
 
         show_password = new JCheckBox("Show Password");
 		show_password.setFont(new Font("Serif", Font.BOLD, 20));
@@ -87,8 +88,8 @@ public class PIN_change extends JFrame implements ActionListener{
         p_show_password.setLayout(new BorderLayout());
         p_buttons.setLayout(new BorderLayout());
        
-        GridLayout button_layout = new GridLayout(1, 3);
-		button_layout.setHgap(40);
+        GridLayout button_layout = new GridLayout(1, 2);
+		button_layout.setHgap(200);
         p_buttons.setLayout(button_layout);
         
         p_current_pin.add(l_current_pin, BorderLayout.WEST);
@@ -104,15 +105,15 @@ public class PIN_change extends JFrame implements ActionListener{
         p_show_password.add(show_password, BorderLayout.EAST);
 
         p_change_pin.add(l_change_pin, BorderLayout.CENTER);
-        p_change_pin.setBorder(new EmptyBorder(40, 340, 0, 260));
+        p_change_pin.setBorder(new EmptyBorder(100, 360, 0, 260));
         
         p_buttons.add(save);
         p_buttons.add(cancel);
 
-        GridLayout global_layout = new GridLayout(11, 1);
-		global_layout.setVgap(25);
+        GridLayout global_layout = new GridLayout(6, 1);
+		global_layout.setVgap(50);
 		JPanel global_panel = new JPanel(global_layout);
-        global_panel.setBorder(new EmptyBorder(60, 260, 100, 260));
+        global_panel.setBorder(new EmptyBorder(150, 260, 100, 260));
         
 
         global_panel.add(p_change_pin);
@@ -143,7 +144,7 @@ public class PIN_change extends JFrame implements ActionListener{
             String b = new String(new_pin.getPassword());
             String c = new String(confirm_pin.getPassword());
             
-           // System.out.println(a + " "+b + " "+ c);
+            System.out.println(a + " "+b + " "+ c);
             
             if(ae.getSource()==save){
                 if(a.equals("")){                    
@@ -158,7 +159,7 @@ public class PIN_change extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Re-Enter new PIN");
                 }
                 
-                else if(b.length() < 4){
+                else if(b.length() < 4 || b.length() > 4){
                     JOptionPane.showMessageDialog(null,"New PIN must be of four digits");
                 }
 
@@ -170,21 +171,26 @@ public class PIN_change extends JFrame implements ActionListener{
                 while (rs.next()) {
                     output =  (String) rs.getObject(1);
                 }
-               // System.out.println(output);
+                System.out.println(output);
 
                 if(a.equals(output)){
 
                     if(b.equals(c)){
-                        
+                        if(isNumber(b) == false){
+                            System.out.println(isNumber(b));
+                            JOptionPane.showMessageDialog(null, "PIN must be a four digit number only");
+                        }
                         // MysqlConnection c1 = new MysqlConnection();
-                         String q1 = "update accounts set pin = '"+b+"' where userID = '"+u_ID+"' ";
+                        else{
+                            String q1 = "update accounts set pin = '"+b+"' where userID = '"+u_ID+"' ";
                          
-                         c1.statement.executeUpdate(q1);
+                            c1.statement.executeUpdate(q1);
                         
-                         JOptionPane.showMessageDialog(null, "PIN changed successfully");
+                            JOptionPane.showMessageDialog(null, "PIN changed successfully");
                          
-                         //new Transcations().setVisible(true);
-                         setVisible(false);
+                            //new Transcations().setVisible(true);
+                            setVisible(false);
+                        }
                          
                      }else{
                          JOptionPane.showMessageDialog(null, "PIN entered doesn't match");
@@ -215,5 +221,15 @@ public class PIN_change extends JFrame implements ActionListener{
     public static void main(String[] args){
         new PIN_change("90001").setVisible(true);
     }
-}
 
+
+    public static boolean isNumber(String s) {
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if(((c - '0') < 0) || ((c - '0') > 9 )){
+                return false;
+            }
+        }
+        return true;
+    }
+}
