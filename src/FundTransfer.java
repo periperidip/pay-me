@@ -29,35 +29,35 @@ public class FundTransfer extends JFrame implements ActionListener{
         setVisible(true);
         
         l_fund_transfer=new JLabel("TRANSFER MONEY");
-        l_fund_transfer.setFont(new Font("System",Font.BOLD,22));
+        l_fund_transfer.setFont(new Font("System",Font.BOLD,48));
 
         l_toAccounNo= new JLabel("TO A/C #");
-        l_toAccounNo.setFont(new Font("System",Font.BOLD,22));
+        l_toAccounNo.setFont(new Font("System",Font.BOLD,25));
 
         l_amount = new JLabel("AMOUNT");
-        l_amount.setFont(new Font("System",Font.BOLD,22));
+        l_amount.setFont(new Font("System",Font.BOLD,25));
 
         l_pin = new JLabel("PIN");
-        l_pin.setFont( new Font("System",Font.BOLD,22));
+        l_pin.setFont( new Font("System",Font.BOLD,25));
 
         toAccountNo = new JTextField(15);
-        toAccountNo.setFont(new Font("Raleway", Font.BOLD, 22));
+        toAccountNo.setFont(new Font("Raleway", Font.BOLD, 28));
         
         amount = new JTextField(15);
-        amount.setFont(new Font("Raleway", Font.BOLD, 22));
+        amount.setFont(new Font("Raleway", Font.BOLD, 28));
         
         pin = new JPasswordField(15);
-        pin.setFont(new Font("Raleway", Font.BOLD, 22));
+        pin.setFont(new Font("Raleway", Font.BOLD, 28));
 
         transfer = new JButton("TRANSFER");
-        transfer.setFont(new Font("System", Font.BOLD, 18));
-        transfer.setBackground(Color.BLACK);
-        transfer.setForeground(Color.WHITE);
+        transfer.setFont(new Font("System", Font.BOLD, 25));
+        transfer.setBackground(Color.white);
+        transfer.setForeground(Color.black);
     
         cancel = new JButton("CANCEL");
-        cancel.setFont(new Font("System", Font.BOLD, 18));
-        cancel.setBackground(Color.BLACK);
-        cancel.setForeground(Color.WHITE);
+        cancel.setFont(new Font("System", Font.BOLD, 25));
+        cancel.setBackground(Color.white);
+        cancel.setForeground(Color.black);
         
         showpassword = new JCheckBox("Show Password");
 		showpassword.setFont(new Font("Serif", Font.BOLD, 20));
@@ -82,8 +82,8 @@ public class FundTransfer extends JFrame implements ActionListener{
         p_buttons.setLayout(new BorderLayout());
         p_showpassword.setLayout(new BorderLayout());
 
-        GridLayout button_layout = new GridLayout(1, 3);
-		button_layout.setHgap(40);
+        GridLayout button_layout = new GridLayout(1, 2);
+		button_layout.setHgap(200);
         p_buttons.setLayout(button_layout);
         
         p_toAccountNo.add(l_toAccounNo, BorderLayout.WEST);
@@ -98,15 +98,15 @@ public class FundTransfer extends JFrame implements ActionListener{
         p_showpassword.add(showpassword, BorderLayout.EAST);
 
         p_fund_transfer.add(l_fund_transfer, BorderLayout.CENTER);
-        p_fund_transfer.setBorder(new EmptyBorder(40, 340, 0, 260));
+        p_fund_transfer.setBorder(new EmptyBorder(100, 360, 0, 260));
 
         p_buttons.add(transfer);
         p_buttons.add(cancel);
 
-        GridLayout global_layout = new GridLayout(11, 1);
-		global_layout.setVgap(25);
+        GridLayout global_layout = new GridLayout(6, 1);
+		global_layout.setVgap(50);
 		JPanel global_panel = new JPanel(global_layout);
-        global_panel.setBorder(new EmptyBorder(60, 260, 100, 260));
+        global_panel.setBorder(new EmptyBorder(150, 260, 100, 260));
 
         global_panel.add(p_fund_transfer);
         global_panel.add(p_toAccountNo);
