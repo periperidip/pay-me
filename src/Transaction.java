@@ -234,7 +234,7 @@ public class Transaction extends JFrame implements ActionListener {
 
 			else if(ae.getSource()==b_detailed)
 			{
-				new DetailedStatement(Integer.parseInt(user_id)).setVisible(true);
+				new DetailedStatement(user_id).setVisible(true);
 				setVisible(false);
 			}
 

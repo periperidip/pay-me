@@ -24,11 +24,11 @@ public class DetailedStatement extends JFrame implements ActionListener {
 	JTable t_detailed_statement;
 	JButton b_back;
 	JPanel p_detailed_statement, p_buttons, p_table;
-	int u_ID;
+	String u_ID;
 
 	public DetailedStatement() {/* Default Constructor */}
 
-	public DetailedStatement(int u_ID) throws SQLException {
+	public DetailedStatement(String u_ID) throws SQLException {
 		this.u_ID = u_ID;
 
 		/* Banner Configuration */
@@ -85,7 +85,7 @@ public class DetailedStatement extends JFrame implements ActionListener {
 								 "Amount (INR)"}, 0);
 		MysqlConnection connection = new MysqlConnection();
 		String q_user_accno = "SELECT account_number FROM accounts " +
-				      "WHERE userID = " + Integer.toString(u_ID);
+				      "WHERE userID = '" + u_ID + "'";
 		ResultSet rs_acc = connection.statement.executeQuery(q_user_accno);
 		String t_acc = "";
 		while (rs_acc.next()) {t_acc = rs_acc.getString("account_number");}
@@ -125,13 +125,9 @@ public class DetailedStatement extends JFrame implements ActionListener {
 				 JOptionPane.YES_OPTION);
 
 			if (result == JOptionPane.YES_OPTION) {
-				new HomeScreen();
+				new Transaction(u_ID);
 				this.setVisible(false);
 			}
 		}
 	}
-
-		public static void main(String[] args) throws SQLException {
-			new DetailedStatement(90000).setVisible(true);
-		}
 }
