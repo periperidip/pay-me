@@ -24,8 +24,9 @@ public class PIN_change extends JFrame implements ActionListener{
 
         u_ID=User_ID;
 
-        setTitle("PIN Change");
-		setSize(1200, 900);
+        setTitle("Pay-ME");
+        setSize(1400, 900);
+        setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 
@@ -89,7 +90,7 @@ public class PIN_change extends JFrame implements ActionListener{
         p_buttons.setLayout(new BorderLayout());
        
         GridLayout button_layout = new GridLayout(1, 2);
-		button_layout.setHgap(200);
+		button_layout.setHgap(350);
         p_buttons.setLayout(button_layout);
         
         p_current_pin.add(l_current_pin, BorderLayout.WEST);
@@ -105,7 +106,7 @@ public class PIN_change extends JFrame implements ActionListener{
         p_show_password.add(show_password, BorderLayout.EAST);
 
         p_change_pin.add(l_change_pin, BorderLayout.CENTER);
-        p_change_pin.setBorder(new EmptyBorder(100, 360, 0, 260));
+        p_change_pin.setBorder(new EmptyBorder(100, 480, 0, 260));
         
         p_buttons.add(save);
         p_buttons.add(cancel);
@@ -188,7 +189,7 @@ public class PIN_change extends JFrame implements ActionListener{
                         
                             JOptionPane.showMessageDialog(null, "PIN changed successfully");
                          
-                            //new Transcations().setVisible(true);
+                            new Transcation(u_ID).setVisible(true);
                             setVisible(false);
                         }
                          
