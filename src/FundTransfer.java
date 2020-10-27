@@ -136,7 +136,7 @@ public class FundTransfer extends JFrame implements ActionListener{
             String a = toAccountNo.getText();
             String b = amount.getText();
             String c = new String(pin.getPassword());
-            long money = Long.parseLong(b);
+            
 
             if(ae.getSource()==transfer){
                 if(a.equals("")){
@@ -148,7 +148,7 @@ public class FundTransfer extends JFrame implements ActionListener{
                 else if(c.equals("")){
                     JOptionPane.showMessageDialog(null, "Please enter your pin number");
                 }
-
+                long money = Long.parseLong(b);
                 MysqlConnection c1 = new MysqlConnection();
                 ResultSet rs =null;
                 String getData = "select pin, balance, account_number from accounts where userID = '"+u_ID+"' ";
@@ -197,7 +197,8 @@ public class FundTransfer extends JFrame implements ActionListener{
                                         
                             c1.statement.executeUpdate(q3);
 
-                            new Transcation(u_ID).setVisible(true);
+                            JOptionPane.showMessageDialog(null, "Amount transfered successfully");
+                            new Transaction(u_ID).setVisible(true);
                             setVisible(false);
                         }
                         else{
@@ -213,6 +214,7 @@ public class FundTransfer extends JFrame implements ActionListener{
 
             }
             else if(ae.getSource()==cancel){
+                new Transaction(u_ID).setVisible(true);
                 setVisible(false);
             }
         } catch (Exception e) {

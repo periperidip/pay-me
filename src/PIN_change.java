@@ -189,7 +189,7 @@ public class PIN_change extends JFrame implements ActionListener{
                         
                             JOptionPane.showMessageDialog(null, "PIN changed successfully");
                          
-                            new Transcation(u_ID).setVisible(true);
+                            new Transaction(u_ID).setVisible(true);
                             setVisible(false);
                         }
                          
@@ -206,7 +206,7 @@ public class PIN_change extends JFrame implements ActionListener{
                 
             }else if(ae.getSource()==cancel){
                 
-               // new Transcations().setVisible(true);
+                new Transaction(u_ID).setVisible(true);
                 setVisible(false);
                 
             }
