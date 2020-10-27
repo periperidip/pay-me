@@ -228,7 +228,7 @@ public class Transaction extends JFrame implements ActionListener {
 
 			else if(ae.getSource()==b_mini)
 			{
-				new MiniStatement(Integer.parseInt(user_id)).setVisible(true);
+				new MiniStatement(user_id).setVisible(true);
 				setVisible(false);
 			}
 
