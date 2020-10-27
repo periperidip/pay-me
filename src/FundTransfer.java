@@ -23,21 +23,22 @@ public class FundTransfer extends JFrame implements ActionListener{
     FundTransfer(String User_ID){
         u_ID = User_ID;
 
-        setTitle("Fund Transfer");
-		setSize(1200, 900);
+        setTitle("Pay-Me");
+        setSize(1400, 900);
+        setResizable(false);
 		setLocationRelativeTo(null);
         setVisible(true);
         
         l_fund_transfer=new JLabel("TRANSFER MONEY");
         l_fund_transfer.setFont(new Font("System",Font.BOLD,48));
 
-        l_toAccounNo= new JLabel("TO A/C #");
+        l_toAccounNo= new JLabel("TO A/C NUMBER");
         l_toAccounNo.setFont(new Font("System",Font.BOLD,25));
 
         l_amount = new JLabel("AMOUNT");
         l_amount.setFont(new Font("System",Font.BOLD,25));
 
-        l_pin = new JLabel("PIN");
+        l_pin = new JLabel("PIN NUMBER");
         l_pin.setFont( new Font("System",Font.BOLD,25));
 
         toAccountNo = new JTextField(15);
@@ -83,7 +84,7 @@ public class FundTransfer extends JFrame implements ActionListener{
         p_showpassword.setLayout(new BorderLayout());
 
         GridLayout button_layout = new GridLayout(1, 2);
-		button_layout.setHgap(200);
+		button_layout.setHgap(350);
         p_buttons.setLayout(button_layout);
         
         p_toAccountNo.add(l_toAccounNo, BorderLayout.WEST);
@@ -98,7 +99,7 @@ public class FundTransfer extends JFrame implements ActionListener{
         p_showpassword.add(showpassword, BorderLayout.EAST);
 
         p_fund_transfer.add(l_fund_transfer, BorderLayout.CENTER);
-        p_fund_transfer.setBorder(new EmptyBorder(100, 360, 0, 260));
+        p_fund_transfer.setBorder(new EmptyBorder(100, 480, 0, 260));
 
         p_buttons.add(transfer);
         p_buttons.add(cancel);
@@ -195,6 +196,8 @@ public class FundTransfer extends JFrame implements ActionListener{
                             String q3 = "insert into transaction values('"+transaction_Id+"','"+to_account_no+"','"+from_account_no+"','"+amount+"','"+timestamp+"')";
                                         
                             c1.statement.executeUpdate(q3);
+
+                            new Transcation(u_ID).setVisible(true);
                             setVisible(false);
                         }
                         else{
