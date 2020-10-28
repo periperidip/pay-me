@@ -160,7 +160,7 @@ public class FundTransfer extends JFrame implements ActionListener {
                     available_balance = rs.getLong("balance");
                     from_account_no = rs.getString("account_number");
                 }
-                c1.connection.close();
+                
                 if (c.equals(correct_pin)) {
                     if (available_balance < money) {
                         JOptionPane.showMessageDialog(null, "Not enough balance in your account");
