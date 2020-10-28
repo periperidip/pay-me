@@ -26,7 +26,7 @@ public class HomeScreen implements ActionListener {
 	JPanel p_container, p_panel, p_logIn, p_signUp, p_temp;
 	GridLayout l_gridLayout1, l_temp;
 	JLabel l_logIn, l_userId, l_password, l_signUp, l_userName, l_DOB, l_email, l_head;
-	JButton b_logIn, b_signUp;
+	JButton b_logIn, b_signUp, b_adminLogIn;
 	JTextField t_email, t_userName, t_userId;
 	JPasswordField p_passField;
 	JCheckBox checkbox;
@@ -46,7 +46,7 @@ public class HomeScreen implements ActionListener {
 
 	public void addComponentToPane() {
 
-		frame = new JFrame("Payme");
+		frame = new JFrame("Pay Me");
 
 		p_signUp = new JPanel();
 		p_logIn = new JPanel();
@@ -61,6 +61,7 @@ public class HomeScreen implements ActionListener {
 
 		b_logIn = new JButton("Sign In");
 		b_signUp = new JButton("Sign Up");
+		b_adminLogIn = new JButton("Admin Access");
 
 		checkbox = new JCheckBox("Show Password      ", false);
 		checkbox.setFont(new Font(LABEL_FONT1, FONT2, 16));
@@ -147,6 +148,15 @@ public class HomeScreen implements ActionListener {
 
 		p_logIn.add(p_temp, gbc);
 
+		gbc.gridy++;
+
+		p_temp = new JPanel(new BorderLayout());
+		b_adminLogIn.setBackground(Color.WHITE);
+		b_adminLogIn.setForeground(Color.BLACK);
+		b_adminLogIn.setFont(new Font(LABEL_FONT1, Font.BOLD, 15));
+		p_temp.add(b_adminLogIn, BorderLayout.EAST);
+		p_logIn.add(p_temp, gbc);
+
 		p_signUp.setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc2 = new GridBagConstraints();
@@ -224,6 +234,11 @@ public class HomeScreen implements ActionListener {
 		p_temp = new JPanel();
 		p_temp.add(b_signUp);
 		p_signUp.add(p_temp, gbc2);
+		gbc2.gridy++;
+
+		JLabel temp = new JLabel(" ");
+		temp.setFont(new Font(LABEL_FONT1, Font.BOLD, 15));
+		p_signUp.add(temp, gbc2);
 
 		p_panel.add(p_logIn);
 		p_panel.add(p_signUp);
@@ -255,6 +270,7 @@ public class HomeScreen implements ActionListener {
 		checkbox.addActionListener(this);
 		b_logIn.addActionListener(this);
 		b_signUp.addActionListener(this);
+		b_adminLogIn.addActionListener(this);
 
 	}
 
@@ -386,7 +402,7 @@ public class HomeScreen implements ActionListener {
 					if (rs_logIn.next()) {
 						String DB_password = rs_logIn.getString("password");
 						if (password.equals(DB_password)) {
-							new Transaction(userId+"").setVisible(true);
+							new Transaction(userId + "").setVisible(true);
 							connection.connection.close();
 							frame.setVisible(false);
 						} else {
@@ -442,15 +458,17 @@ public class HomeScreen implements ActionListener {
 
 						new Register(user_name, formattedDate, email).setVisible(true);
 						frame.setVisible(false);
-
 					}
 				}
+			}
+			if (ae.getSource() == b_adminLogIn) {
+				new AdminLogin();
+				frame.setVisible(false);
 			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	public static void main(String[] args) {
