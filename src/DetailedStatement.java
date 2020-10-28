@@ -92,8 +92,8 @@ public class DetailedStatement extends JFrame implements ActionListener {
 		String q_detst = "SELECT * FROM transaction WHERE" +
 				 " from_account_number = '" + t_acc + "'" +
 				 " OR to_account_number = '" + t_acc + "'" +
-				 " LIMIT " + Integer.toString(ms_r) +
-				 " ORDER BY timestamp DESC";
+				 " ORDER BY timestamp DESC" +
+				 " LIMIT " + Integer.toString(ms_r);
 		ResultSet rs_detst = connection.statement.executeQuery(q_detst);
 		while (rs_detst.next()) {
 			String t_id = rs_detst.getString("transactionID");
