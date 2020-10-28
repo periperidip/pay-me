@@ -160,7 +160,6 @@ public class FundTransfer extends JFrame implements ActionListener {
                     available_balance = rs.getLong("balance");
                     from_account_no = rs.getString("account_number");
                 }
-                // System.out.println(correct_pin + " " + available_balance + " " + a);
                 c1.connection.close();
                 if (c.equals(correct_pin)) {
                     if (available_balance < money) {
@@ -173,34 +172,41 @@ public class FundTransfer extends JFrame implements ActionListener {
                         rs1 = c2.statement.executeQuery(check_user_exists);
                         while (rs1.next()) {
                             total_balance = rs1.getLong("balance");
-                            // System.out.println(total_balance);
                         }
-
+                        c2.connection.close();
                         if (total_balance >= 0) {
+                            try {
+                                c1.connection.setAutoCommit(false);
+                                total_balance = total_balance + money;
+                                available_balance = available_balance - money;
+                                String q1 = "update accounts set balance = '" + available_balance + "' where userID = '"
+                                        + u_ID + "' ";
+                                String q2 = "update accounts set balance =  '" + total_balance
+                                        + "' where account_number = '" + a + "' ";
+                                c1.statement.executeUpdate(q1);
+                                c1.statement.executeUpdate(q2);
 
-                            total_balance = total_balance + money;
-                            available_balance = available_balance - money;
-                            String q1 = "update accounts set balance = '" + available_balance + "' where userID = '"
-                                    + u_ID + "' ";
-                            String q2 = "update accounts set balance =  '" + total_balance
-                                    + "' where account_number = '" + a + "' ";
-                            c1.statement.executeUpdate(q1);
-                            c1.statement.executeUpdate(q2);
+                                String transaction_Id = getTransactionID();
+                                String to_account_no = a;
+                                long amount = money;
+                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                            String transaction_Id = getTransactionID();
-                            String to_account_no = a;
-                            long amount = money;
-                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                String q3 = "insert into transaction values('" + transaction_Id + "','" + to_account_no
+                                        + "','" + from_account_no + "','" + amount + "','" + timestamp + "')";
 
-                            String q3 = "insert into transaction values('" + transaction_Id + "','" + to_account_no
-                                    + "','" + from_account_no + "','" + amount + "','" + timestamp + "')";
+                                c1.statement.executeUpdate(q3);
 
-                            c1.statement.executeUpdate(q3);
-
-                            JOptionPane.showMessageDialog(null, "Amount transfered successfully");
-                            c2.connection.close();
-                            new Transaction(u_ID).setVisible(true);
-                            setVisible(false);
+                                JOptionPane.showMessageDialog(null, "Amount transfered successfully");
+                                c1.connection.commit();
+                                c1.connection.close();
+                                new Transaction(u_ID).setVisible(true);
+                            setVisible(false);}
+                            catch (Exception exception) {
+                                c1.connection.rollback();
+                                JOptionPane.showMessageDialog(null, "Payment was unsuccessful\n Your money has been refunded", "Error", JOptionPane.ERROR_MESSAGE);
+                            } finally {
+                                c1.statement.close();
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "no user exists with given account no.");
                         }
@@ -215,7 +221,6 @@ public class FundTransfer extends JFrame implements ActionListener {
                 setVisible(false);
             }
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println("error in amount transfer");
             System.out.println("error: " + e);
         }
