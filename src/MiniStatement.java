@@ -91,7 +91,8 @@ public class MiniStatement extends JFrame implements ActionListener {
 		String q_minist = "SELECT * FROM transaction WHERE" +
 				  " from_account_number = '" + t_acc + "'" +
 				  " OR to_account_number = '" + t_acc + "'" +
-				  " LIMIT " + Integer.toString(ms_r);
+				  " LIMIT " + Integer.toString(ms_r) +
+				  " ORDER BY timestamp DESC";
 		ResultSet rs_minist = connection.statement.executeQuery(q_minist);
 		while(rs_minist.next()) {
 			String t_id = rs_minist.getString("transactionID");
