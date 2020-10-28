@@ -40,6 +40,7 @@ public class Transaction extends JFrame implements ActionListener {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		user_id  = id;
 		l_transactions = new JLabel("Select your transaction");
