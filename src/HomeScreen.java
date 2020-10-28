@@ -389,6 +389,7 @@ public class HomeScreen implements ActionListener {
 						String DB_password = rs_logIn.getString("password");
 						if (password.equals(DB_password)) {
 							new Transaction(userId+"").setVisible(true);
+							connection.connection.close();
 							frame.setVisible(false);
 						} else {
 							JOptionPane.showMessageDialog(null, "Incorrect Password!", "Error",

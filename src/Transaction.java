@@ -177,6 +177,7 @@ public class Transaction extends JFrame implements ActionListener {
 						db_balance = rs.getLong("balance");
 					}
 
+					c.connection.close();
 				
 					if(input_password.equals(db_pin))
 					{
@@ -212,6 +213,7 @@ public class Transaction extends JFrame implements ActionListener {
 				String u_deposit = "update accounts set balance = '" + newBalance +"'where userID ='"+user_id+"' ";
 				c.statement.executeUpdate(u_deposit);
 				JOptionPane.showMessageDialog(null, "The amount has been deposited.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+				c.connection.close();
 			}
 
 			else if(ae.getSource()==b_send)

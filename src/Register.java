@@ -353,6 +353,7 @@ public class Register extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, display_info);
 
 					new HomeScreen();
+					mysqlConnection.connection.close();
 					setVisible(false);
 				} catch (Exception exception) {
 					System.out.println(exception);
