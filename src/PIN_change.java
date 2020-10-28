@@ -8,7 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.sql.*;
 
 public class PIN_change extends JFrame implements ActionListener{
-    JPasswordField current_pin,new_pin,confirm_pin;
+    private static final long serialVersionUID = 1L;
+    JPasswordField current_pin, new_pin, confirm_pin;
     JButton cancel,save;
     JLabel l_change_pin,l_current_pin,l_new_pin,l_confirm_pin;
     JPanel p_change_pin,p_current_pin,p_new_pin,p_confirm_pin,p_buttons,p_show_password;
@@ -144,9 +145,7 @@ public class PIN_change extends JFrame implements ActionListener{
             String a = new String(current_pin.getPassword());
             String b = new String(new_pin.getPassword());
             String c = new String(confirm_pin.getPassword());
-            
-            System.out.println(a + " "+b + " "+ c);
-            
+                        
             if(ae.getSource()==save){
                 if(a.equals("")){                    
                     JOptionPane.showMessageDialog(null, "Please Enter Current PIN");
@@ -172,23 +171,20 @@ public class PIN_change extends JFrame implements ActionListener{
                 while (rs.next()) {
                     output =  (String) rs.getObject(1);
                 }
-                System.out.println(output);
 
                 if(a.equals(output)){
 
                     if(b.equals(c)){
                         if(isNumber(b) == false){
-                            System.out.println(isNumber(b));
                             JOptionPane.showMessageDialog(null, "PIN must be a four digit number only");
                         }
-                        // MysqlConnection c1 = new MysqlConnection();
                         else{
                             String q1 = "update accounts set pin = '"+b+"' where userID = '"+u_ID+"' ";
                          
                             c1.statement.executeUpdate(q1);
                         
                             JOptionPane.showMessageDialog(null, "PIN changed successfully");
-                         
+                            c1.connection.close();
                             new Transaction(u_ID).setVisible(true);
                             setVisible(false);
                         }
@@ -218,11 +214,6 @@ public class PIN_change extends JFrame implements ActionListener{
         }
             
     }
-
-    public static void main(String[] args){
-        new PIN_change("90001").setVisible(true);
-    }
-
 
     public static boolean isNumber(String s) {
         for(int i=0;i<s.length();i++){

@@ -100,6 +100,7 @@ public class MiniStatement extends JFrame implements ActionListener {
 			String t_cr_dr = (t_acc.equals(t_from)) ? "DR" : "CR";
 			model.addRow(new Object[]{t_id, t_cr_dr, t_am});
 		}
+		connection.connection.close();
 		return model;
 	}
 

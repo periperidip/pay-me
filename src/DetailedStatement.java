@@ -103,6 +103,7 @@ public class DetailedStatement extends JFrame implements ActionListener {
 			String t_am = rs_detst.getString("amount");
 			model.addRow(new Object[]{t_id, t_date, t_from, t_to, t_cr_dr, t_am});
 		}
+		connection.connection.close();
 		return model;
 	}
 
