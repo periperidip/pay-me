@@ -251,8 +251,9 @@ public class FundTransfer extends JFrame implements ActionListener {
             String max_transaction_id_query = "SELECT MAX(transactionID) FROM transaction";
             ResultSet max_transaction_id_number = mysqlConnection.statement.executeQuery(max_transaction_id_query);
             if (max_transaction_id_number.next()) {
+                String curr_transaction_number = max_transaction_id_number.getString(1);
                 mysqlConnection.connection.close();
-                return increment(max_transaction_id_number.getString(1));
+                return increment(curr_transaction_number);
             } else {
                 mysqlConnection.connection.close();
                 return "15897840001";
