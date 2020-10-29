@@ -101,7 +101,7 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 				 JOptionPane.YES_OPTION);
 
 			if (result == JOptionPane.YES_OPTION) {
-				new HomeScreen();
+				new AdminTransaction();
 				this.setVisible(false);
 			}
 		} else if(ae.getSource() == b_clear) {
@@ -130,7 +130,7 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 								      " such account" +
 								      " exists");
 				else
-					new DetailedStatement(t_user_acc);
+					new ShowStatement(t_user_acc);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -254,9 +254,5 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 				}
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		new AdminTransHistory().setVisible(true);
 	}
 }
