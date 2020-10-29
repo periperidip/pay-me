@@ -212,6 +212,7 @@ public class AdminLogin implements ActionListener {
 
                             new AdminTransaction().setVisible(true);
                             connection.connection.close();
+                            new AdminTransaction().setVisible(true);
                             frame.setVisible(false);
                         } else {
                             JOptionPane.showMessageDialog(null, "Incorrect Password!", "Error",
