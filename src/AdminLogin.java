@@ -158,7 +158,7 @@ public class AdminLogin implements ActionListener {
 
         checkbox.addActionListener(this);
         b_logIn.addActionListener(this);
-
+        b_back.addActionListener(this);
     }
 
     private static boolean isEmptyFields(String adminname, String password) {

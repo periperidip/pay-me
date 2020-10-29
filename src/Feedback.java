@@ -7,11 +7,11 @@ import javax.swing.border.EmptyBorder;
 
 //import org.graalvm.compiler.lir.LIRInstruction.Use;
 
-import java.util.*;
 import java.sql.*;
 
 public class Feedback extends JFrame implements ActionListener{
     
+    private static final long serialVersionUID = 1L;
     JTextArea body_text, title_text;
     JButton cancel,submit;
     JLabel l_feedback, l_title, l_body;
@@ -78,7 +78,7 @@ public class Feedback extends JFrame implements ActionListener{
         p_body_text = new JPanel();
         p_feedback = new JPanel();
         p_buttons = new JPanel();
-        //p_buttons.setBorder(new EmptyBorder(50,260,0,260));
+        p_buttons.setBorder(new EmptyBorder(50,100,0,100));
 
         p_title.setLayout(new BorderLayout());
         p_title_text.setLayout(new BorderLayout());
@@ -204,5 +204,5 @@ public class Feedback extends JFrame implements ActionListener{
 				return "121201";
 		} else
 			return "121201";
-	}
+    }
 }
