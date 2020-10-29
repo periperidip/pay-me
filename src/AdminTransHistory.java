@@ -77,7 +77,6 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(p_accno, BorderLayout.CENTER);
 		getContentPane().add(p_buttons, BorderLayout.SOUTH);
-		// getContentPane().add(global_panel, BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -116,8 +115,8 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 				return;
 			}
 			String q_user_acc = "SELECT account_number FROM accounts " +
-					   "WHERE account_number = '" +
-					   account_number + "'";
+					    "WHERE account_number = '" +
+					    account_number + "'";
 			ResultSet rs_acc = null;
 			String t_user_acc = "";
 			try {
@@ -125,6 +124,7 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 				while (rs_acc.next()) {
 					t_user_acc = rs_acc.getString("account_number");
 				}
+				connection.connection.close();
 				if (!t_user_acc.equals(account_number))
 					JOptionPane.showMessageDialog(null, "No" +
 								      " such account" +
@@ -210,10 +210,10 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 									 "Amount (INR)"}, 0);
 			MysqlConnection connection = new MysqlConnection();
 			String q_detst = "SELECT * FROM transaction WHERE" +
-					" from_account_number = '" + acc_no + "'" +
-					" OR to_account_number = '" + acc_no + "'" +
-					" ORDER BY timestamp DESC" +
-					" LIMIT " + Integer.toString(ms_r);
+					 " from_account_number = '" + acc_no + "'" +
+					 " OR to_account_number = '" + acc_no + "'" +
+					 " ORDER BY timestamp DESC" +
+					 " LIMIT " + Integer.toString(ms_r);
 			ResultSet rs_detst = connection.statement.executeQuery(q_detst);
 			while (rs_detst.next()) {
 				String t_id = rs_detst.getString("transactionID");
