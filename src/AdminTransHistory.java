@@ -118,12 +118,12 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 			String q_user_acc = "SELECT account_number FROM accounts " +
 					   "WHERE account_number = '" +
 					   account_number + "'";
-			ResultSet rs_id = null;
+			ResultSet rs_acc = null;
 			String t_user_acc = "";
 			try {
-				rs_id = connection.statement.executeQuery(q_user_acc);
-				while (rs_id.next()) {
-					t_user_acc = rs_id.getString("userID");
+				rs_acc = connection.statement.executeQuery(q_user_acc);
+				while (rs_acc.next()) {
+					t_user_acc = rs_acc.getString("account_number");
 				}
 				if (!t_user_acc.equals(account_number))
 					JOptionPane.showMessageDialog(null, "No" +
