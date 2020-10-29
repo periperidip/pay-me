@@ -75,8 +75,10 @@ public class AdminTransLedger extends JFrame implements ActionListener {
 
 	public DefaultTableModel fill_table() throws SQLException {
 		DefaultTableModel model = new DefaultTableModel(new String[]
-								{"Transaction ID", "Date",
-								 "From Account", "To Account",
+								{"Transaction ID",
+								 "Date",
+								 "From Account",
+								 "To Account",
 								 "Amount (INR)"}, 0);
 		MysqlConnection connection = new MysqlConnection();
 		String q_detst = "SELECT * FROM transaction" +
@@ -113,13 +115,9 @@ public class AdminTransLedger extends JFrame implements ActionListener {
 				 JOptionPane.YES_OPTION);
 
 			if (result == JOptionPane.YES_OPTION) {
-				new HomeScreen();
+				new AdminTransaction();
 				this.setVisible(false);
 			}
 		}
-	}
-
-	public static void main(String[] args) throws SQLException {
-		new AdminTransLedger().setVisible(true);
 	}
 }
