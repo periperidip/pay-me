@@ -43,10 +43,10 @@ public class Transaction extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		user_id  = id;
-		l_transactions = new JLabel("Select your transaction");
+		l_transactions = new JLabel("Select Your Service");
 		l_transactions.setFont(new Font("Ariel",Font.BOLD,50)); 
 
-		b_deposit = new JButton("Deposit");
+		b_deposit = new JButton("Report a problem");
 		b_deposit.setFont(new Font("Serif",Font.BOLD,25));
 		b_deposit.setBackground(Color.WHITE);
 		b_deposit.setForeground(Color.BLACK);
@@ -97,7 +97,7 @@ public class Transaction extends JFrame implements ActionListener {
 		p5.setLayout(new BorderLayout());
 
 		p1.add(l_transactions, BorderLayout.CENTER);
-		p1.setBorder(new EmptyBorder(100, 420, 0, 260)); 
+		p1.setBorder(new EmptyBorder(100, 460, 0, 260)); 
 
 		p2.add(b_deposit);
 		p2.add(b_pin);
@@ -197,24 +197,30 @@ public class Transaction extends JFrame implements ActionListener {
 				}
 			}
 			
+			// else if(ae.getSource()==b_deposit)
+			// {
+			// 	String newDeposit = JOptionPane.showInputDialog(null, "Enter the amount you want to deposit");
+			// 	Long amount = Long.parseLong(newDeposit);
+			// 	MysqlConnection c = new MysqlConnection();
+			// 	ResultSet rs = null;
+			// 	String q_balance = "SELECT balance from accounts where userID = '"+user_id+"' ";
+			// 	rs = c.statement.executeQuery(q_balance);
+			// 	Long prevBalance=0L;
+			// 	while(rs.next())
+			// 	{
+			// 		prevBalance = rs.getLong("balance");
+			// 	}
+			// 	Long newBalance = prevBalance + amount;
+			// 	String u_deposit = "update accounts set balance = '" + newBalance +"'where userID ='"+user_id+"' ";
+			// 	c.statement.executeUpdate(u_deposit);
+			// 	JOptionPane.showMessageDialog(null, "The amount has been deposited.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+			// 	c.connection.close();
+			// }
+
 			else if(ae.getSource()==b_deposit)
 			{
-				String newDeposit = JOptionPane.showInputDialog(null, "Enter the amount you want to deposit");
-				Long amount = Long.parseLong(newDeposit);
-				MysqlConnection c = new MysqlConnection();
-				ResultSet rs = null;
-				String q_balance = "SELECT balance from accounts where userID = '"+user_id+"' ";
-				rs = c.statement.executeQuery(q_balance);
-				Long prevBalance=0L;
-				while(rs.next())
-				{
-					prevBalance = rs.getLong("balance");
-				}
-				Long newBalance = prevBalance + amount;
-				String u_deposit = "update accounts set balance = '" + newBalance +"'where userID ='"+user_id+"' ";
-				c.statement.executeUpdate(u_deposit);
-				JOptionPane.showMessageDialog(null, "The amount has been deposited.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-				c.connection.close();
+				new Feedback(user_id).setVisible(true);
+				setVisible(false);
 			}
 
 			else if(ae.getSource()==b_send)
@@ -266,6 +272,9 @@ public class Transaction extends JFrame implements ActionListener {
 			System.out.println("Could not perform the selected transaction.");
 			
 		}
+	}
+	public static void main(String[] args) {
+		new Transaction("90001").setVisible(true);
 	}
 }
 
