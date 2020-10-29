@@ -226,10 +226,6 @@ public class FundTransfer extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        new FundTransfer("90001").setVisible(true);
-    }
-
     public static String increment(String str) {
         int carry = 1;
         int sum = 0;
