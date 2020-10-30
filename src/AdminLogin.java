@@ -232,9 +232,4 @@ public class AdminLogin implements ActionListener {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-
-        new AdminLogin();
-    }
 }

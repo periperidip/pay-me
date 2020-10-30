@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.plaf.synth.SynthStyle;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -208,7 +207,6 @@ public class PIN_change extends JFrame implements ActionListener{
             }
             
         }catch(Exception e){
-                    //e.printStackTrace();
                     System.out.println("error in pin change");
                     System.out.println("error: "+e);
         }

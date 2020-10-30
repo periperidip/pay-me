@@ -228,7 +228,6 @@ public class Register extends JFrame implements ActionListener {
 		global_layout.setVgap(25);
 		JPanel global_panel = new JPanel(global_layout);
 		global_panel.setBorder(new EmptyBorder(60, 350, 100, 350));
-		// global_panel.setPreferredSize(new Dimension(200, 200));
 
 		global_panel.add(p_address);
 		global_panel.add(p_pin_code);

@@ -20,7 +20,6 @@ public class AdminTransaction extends JFrame implements ActionListener {
 
     JButton b_detailed, b_deposit, b_userDetailed, b_reports, b_back;
     JLabel l_heading;
-    // String accountNumber="";
     JPanel p1,p2,p3,p4;
 
     Border blackline = BorderFactory.createLineBorder(Color.black);
@@ -35,7 +34,6 @@ public class AdminTransaction extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // accountNumber = accno;
 
         b_deposit = new JButton("Deposit");
 		b_deposit.setFont(new Font("Serif",Font.BOLD,25));
@@ -104,7 +102,6 @@ public class AdminTransaction extends JFrame implements ActionListener {
 		global_panel.setBorder(new EmptyBorder(100, 300, 100, 300));
 		
 		
-		// global_panel.add(p1);
 		global_panel.add(p2);
 		global_panel.add(p3);
 		global_panel.add(p4);
@@ -128,7 +125,6 @@ public class AdminTransaction extends JFrame implements ActionListener {
 
                 
 				MysqlConnection c = new MysqlConnection();
-				// ResultSet rs = null;
 				String q_balance = "SELECT balance from accounts where account_number = '"+accountNumber+"' ";
 				ResultSet rs = c.statement.executeQuery(q_balance);
 				Long prevBalance=0L;
@@ -192,9 +188,5 @@ public class AdminTransaction extends JFrame implements ActionListener {
         {
             
         }
-    }
-
-    public static void main(String[] args) {
-        new AdminTransaction().setVisible(true);
     }
 }

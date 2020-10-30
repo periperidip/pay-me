@@ -1,11 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.plaf.synth.SynthStyle;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-
-//import org.graalvm.compiler.lir.LIRInstruction.Use;
 
 import java.sql.*;
 
@@ -55,11 +52,6 @@ public class Feedback extends JFrame implements ActionListener{
         body_text.setFont(new Font("Raleway", Font.PLAIN, 16));
         body_text.setLineWrap(true);
         body_text.setWrapStyleWord(true);
-        // JScrollPane scrolltxt = new JScrollPane();
-        // scrolltxt.setViewportView(body_text);
-        // scrolltxt.setWheelScrollingEnabled(true);
-        
-       
 
         cancel = new JButton("CANCEL");
         cancel.setFont(new Font("System", Font.BOLD, 25));
@@ -118,9 +110,7 @@ public class Feedback extends JFrame implements ActionListener{
         global_panel.add(p_title_text);
         global_panel.add(p_body);
         global_panel.add(p_body_text);
-        //global_panel.add(scrolltxt,BorderLayout.EAST);
         global_panel.add(p_buttons);
-       // global_panel.add(scrollPane);
 
         getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(p_feedback, BorderLayout.NORTH);

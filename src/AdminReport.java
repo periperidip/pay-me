@@ -203,14 +203,4 @@ public class AdminReport extends JFrame implements ActionListener {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-		try {
-			new AdminReport().setVisible(true);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		;
-	}
-
 }

@@ -196,26 +196,6 @@ public class Transaction extends JFrame implements ActionListener {
 					}
 				}
 			}
-			
-			// else if(ae.getSource()==b_deposit)
-			// {
-			// 	String newDeposit = JOptionPane.showInputDialog(null, "Enter the amount you want to deposit");
-			// 	Long amount = Long.parseLong(newDeposit);
-			// 	MysqlConnection c = new MysqlConnection();
-			// 	ResultSet rs = null;
-			// 	String q_balance = "SELECT balance from accounts where userID = '"+user_id+"' ";
-			// 	rs = c.statement.executeQuery(q_balance);
-			// 	Long prevBalance=0L;
-			// 	while(rs.next())
-			// 	{
-			// 		prevBalance = rs.getLong("balance");
-			// 	}
-			// 	Long newBalance = prevBalance + amount;
-			// 	String u_deposit = "update accounts set balance = '" + newBalance +"'where userID ='"+user_id+"' ";
-			// 	c.statement.executeUpdate(u_deposit);
-			// 	JOptionPane.showMessageDialog(null, "The amount has been deposited.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-			// 	c.connection.close();
-			// }
 
 			else if(ae.getSource()==b_deposit)
 			{
@@ -272,9 +252,6 @@ public class Transaction extends JFrame implements ActionListener {
 			System.out.println("Could not perform the selected transaction.");
 			
 		}
-	}
-	public static void main(String[] args) {
-		new Transaction("90001").setVisible(true);
 	}
 }
 

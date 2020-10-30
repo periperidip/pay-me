@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.plaf.synth.SynthStyle;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.sql.*;
