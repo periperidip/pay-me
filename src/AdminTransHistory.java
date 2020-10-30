@@ -129,8 +129,10 @@ public class AdminTransHistory extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "No" +
 								      " such account" +
 								      " exists");
-				else
+				else {
 					new ShowStatement(t_user_acc);
+					setVisible(false);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
