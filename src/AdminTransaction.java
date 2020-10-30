@@ -34,7 +34,7 @@ public class AdminTransaction extends JFrame implements ActionListener {
 		setResizable(false);
 		setLocationRelativeTo(null);
         setVisible(true);
-        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         // accountNumber = accno;
 
         b_deposit = new JButton("Deposit");
